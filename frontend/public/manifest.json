@@ -1,0 +1,9 @@
+{
+  "name": "online-marketplace",
+  "short_name": "online-marketplace",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "icons": []
+}

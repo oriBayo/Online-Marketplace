@@ -1,0 +1,58 @@
+:root{
+    --mainPink:#ef7998;
+    --mainYellow: rgb(249, 228, 148);
+    --mainWhite: #fff;
+    --mainBlack: #000;
+    --yellowTrans: rgba(204, 151, 101, 0.5);
+    --mainGrey: rgb(238, 238, 238);
+}
+.max-height{
+    min-height: 85vh;
+}
+main{
+    min-height: calc(100vh - 70px - 80px);
+}
+.countup{
+    color: var(--mainPink)
+}
+.homePage{
+    background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url("../asserts/Leonardo_Diffusion_apple_products_1.jpg") 
+    center/cover no-repeat fixed;
+    position: absolute;
+    width: 100%;
+
+}
+
+.banner{
+    color: var(--mainWhite);
+}
+.banner-title{
+    color: var(--mainPink);
+    font-size: 3rem;
+}
+.banner-link{
+    font-size: 1.5rem;
+    color: var(--mainBlack);
+    border: 0.2rem solid --mainBlack;
+   
+}
+.banner-link:hover{
+    background-color: var(--mainBlack);
+}
+
+.img-carousel{
+    cursor: pointer;
+}
+
+.single-item:hover{
+    box-shadow: 0 10px 15px rgb(0,0,0);
+    transform: translateY(-20px)
+  }
+
+.icon{
+    cursor: pointer;
+}
+.icon:hover{
+    transform: translatey(-1.5px);
+    color: red;
+}
