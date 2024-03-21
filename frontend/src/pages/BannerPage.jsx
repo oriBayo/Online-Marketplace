@@ -12,7 +12,7 @@ const BannerPage = () => {
           <Col className='col-10 mx-auto banner text-center'>
             <h1 className='text-capitalize text-light m-4'>
               welcome to
-              <strong className='banner-title'> Online Marketplace2</strong>
+              <strong className='banner-title'> Online Marketplace</strong>
             </h1>
             <Button variant='outline-secondary' className='w-25 mb-5 mt-3'>
               explore

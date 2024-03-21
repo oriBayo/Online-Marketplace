@@ -46,10 +46,12 @@ const addProduct = asyncHandler(async (req, res) => {
 const updateProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id)
   if (product) {
-    product.name = res.body.name
-    product.category = res.body.category
-    product.price = res.body.price
-    product.brand = res.body.brand
+    product.name = req.body.name
+    product.category = req.body.category
+    product.price = req.body.price
+    product.brand = req.body.brand
+    product.description = req.body.description
+    product.countInStock = req.body.countInStock
 
     const updatedProduct = await product.save()
     res.status(200).json(updatedProduct)
@@ -57,8 +59,6 @@ const updateProduct = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error('Product not found')
   }
-
-  await product.save()
 })
 
 // @desc    Delete product

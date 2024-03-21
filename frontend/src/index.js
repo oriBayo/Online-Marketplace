@@ -31,6 +31,7 @@ import PrivateRoute from './components/PrivateRoute'
 import AdminRoute from './components/AdminRoute'
 import OrderListPage from './pages/admin/OrderListPage'
 import ProductListPage from './pages/admin/ProductListPage'
+import UpdateProductPage from './pages/admin/UpdateProductPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,6 +56,7 @@ const router = createBrowserRouter(
         <Route path='' Component={AdminRoute}>
           <Route path='admin/orderlist' Component={OrderListPage} />
           <Route path='admin/productlist' Component={ProductListPage} />
+          <Route path='admin/products/:id' Component={UpdateProductPage} />
         </Route>
       </Route>
     </>

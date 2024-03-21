@@ -7,12 +7,11 @@ const ProfilePage = () => {
   return (
     <Row>
       <Col md={3}>
-        <h1 className='mb-2 text-center'>Profile</h1>
-
+        <h1 className='m-4 text-center'>Profile</h1>
         <ProfileFormComp />
       </Col>
       <Col md={9}>
-        <h1 className='mb-2 text-center'>Orders</h1>
+        <h1 className='m-4 text-center'>Orders</h1>
         <Card>
           <Card.Body className='mb-2 '>
             <ProfileTableOrdersComp />
