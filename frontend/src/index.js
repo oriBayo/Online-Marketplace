@@ -32,6 +32,8 @@ import AdminRoute from './components/AdminRoute'
 import OrderListPage from './pages/admin/OrderListPage'
 import ProductListPage from './pages/admin/ProductListPage'
 import ProductEditPage from './pages/admin/ProductEditPage'
+import UsersListPage from './pages/admin/UsersListPage'
+import UserEditPage from './pages/admin/UserEditPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -57,6 +59,8 @@ const router = createBrowserRouter(
           <Route path='admin/orderlist' Component={OrderListPage} />
           <Route path='admin/productlist' Component={ProductListPage} />
           <Route path='admin/products/:id' Component={ProductEditPage} />
+          <Route path='admin/userlist' Component={UsersListPage} />
+          <Route path='admin/users/:id' Component={UserEditPage} />
         </Route>
       </Route>
     </>
