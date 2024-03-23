@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import {
   useGetProductDetailsQuery,
   useUpdateProductMutation,
+  useUploadImageMutation,
 } from '../../features/productsApiSlice'
 import { useState, useEffect } from 'react'
 import Loader from '../../components/LoaderComp'
@@ -10,7 +11,7 @@ import MessageComp from '../../components/MessageComp'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
-const UpdateProductPage = () => {
+const ProductEditPage = () => {
   const { id: productId } = useParams()
   const navigate = useNavigate()
 
@@ -20,6 +21,7 @@ const UpdateProductPage = () => {
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('')
   const [countInStock, setCountInStock] = useState(0)
+  const [image, setImage] = useState('')
 
   const {
     data: product,
@@ -31,42 +33,49 @@ const UpdateProductPage = () => {
   const [updateProduct, { isLoading: loadingUpdate, error: errorUpdate }] =
     useUpdateProductMutation()
 
+  const [uploadImage, { isLoading: loadingUpload }] = useUploadImageMutation()
+
   useEffect(() => {
-    if (!isLoading) {
+    if (product) {
       setName(product.name)
       setPrice(product.price)
       setBrand(product.brand)
       setDescription(product.description)
       setCategory(product.category)
       setCountInStock(product.countInStock)
+      setImage(product.image)
     }
-  }, [isLoading, product])
+  }, [product])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log({
-      _id: product._id,
-      name,
-      price,
-      category,
-      description,
-      brand,
-      countInStock,
-    })
     try {
       await updateProduct({
-        _id: product._id,
+        productId,
         name,
         price,
         category,
         description,
         brand,
+        image,
         countInStock,
       }).unwrap()
       refetch()
       toast.success('Product Updated seccessfuly')
     } catch (error) {
       toast.error(error)
+    }
+  }
+
+  const uploadImageHandler = async (e) => {
+    const formData = new FormData()
+    formData.append('image', e.target.files[0])
+    try {
+      const res = await uploadImage(formData).unwrap()
+      toast.success(res.message)
+      setImage(res.image)
+    } catch (error) {
+      toast.error(error?.data?.message || error.error)
     }
   }
 
@@ -99,6 +108,22 @@ const UpdateProductPage = () => {
             ></Form.Control>
           </Form.Group>
 
+          <Form.Group controlId='image' className='mb-2'>
+            <Form.Label>Image</Form.Label>
+            <Form.Control
+              className='mb-1'
+              type='text'
+              placeholder='Enter image url'
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+            ></Form.Control>
+            <Form.Control
+              type='file'
+              label='Choose file'
+              onChange={uploadImageHandler}
+            ></Form.Control>
+          </Form.Group>
+
           <Form.Group controlId='brand' className='mb-2'>
             <Form.Label>Brand</Form.Label>
             <Form.Control
@@ -121,7 +146,7 @@ const UpdateProductPage = () => {
             <Form.Label>Description</Form.Label>
             <Form.Control
               as='textarea'
-              rows={3}
+              rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></Form.Control>
@@ -159,4 +184,4 @@ const UpdateProductPage = () => {
   )
 }
 
-export default UpdateProductPage
+export default ProductEditPage

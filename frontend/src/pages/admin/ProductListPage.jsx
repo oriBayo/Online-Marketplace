@@ -13,14 +13,20 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { useDeleteProductMutation } from '../../features/productsApiSlice'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { useCreateProductMutation } from '../../features/productsApiSlice'
+import {
+  useCreateProductMutation,
+  useUploadImageMutation,
+} from '../../features/productsApiSlice'
 
 const ProductListPage = () => {
   const [show, setShow] = useState(false)
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
-  const [category, setCategory] = useState('')
   const [brand, setBrand] = useState('')
+  const [description, setDescription] = useState('')
+  const [category, setCategory] = useState('')
+  const [countInStock, setCountInStock] = useState(0)
+  const [image, setImage] = useState('')
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -31,6 +37,8 @@ const ProductListPage = () => {
 
   const [createProduct, { isLoading: loadingCreate }] =
     useCreateProductMutation()
+
+  const [uploadImage, { isLoading: loadingUpload }] = useUploadImageMutation()
 
   const deleteProductHandler = async (productId) => {
     if (window.confirm('Are you sure')) {
@@ -46,12 +54,32 @@ const ProductListPage = () => {
 
   const createProductHandler = async () => {
     try {
-      await createProduct({ price, name, brand, category }).unwrap()
+      await createProduct({
+        price: parseFloat(price),
+        name,
+        brand,
+        category,
+        description,
+        image,
+        countInStock: parseInt(countInStock),
+      }).unwrap()
       refetch()
       handleClose()
       toast.success('Product created')
     } catch (err) {
       toast.error(err?.data?.message || err.error)
+    }
+  }
+
+  const uploadImageHandler = async (e) => {
+    const formData = new FormData()
+    formData.append('image', e.target.files[0])
+    try {
+      const res = await uploadImage(formData).unwrap()
+      toast.success(res.message)
+      setImage(res.image)
+    } catch (error) {
+      toast.error(error?.data?.message || error.error)
     }
   }
 
@@ -64,39 +92,81 @@ const ProductListPage = () => {
         <Offcanvas.Body>
           <Container>
             <Form>
-              <Form.Group className='mb-3' controlId='name'>
+              <Form.Group className='mb-1' controlId='name'>
                 <Form.Label className='fw-bold text-black'>Name</Form.Label>
                 <Form.Control
+                  placeholder='Enter name'
                   type='text'
                   onChange={(e) => setName(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group className='mb-3' controlId='price'>
+              <Form.Group className='mb-1' controlId='price'>
                 <Form.Label className='fw-bold text-black'>Price</Form.Label>
                 <Form.Control
                   type='number'
+                  placeholder='Enter price'
                   onChange={(e) => setPrice(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group className='mb-3' controlId='category'>
-                <Form.Label className='fw-bold text-black'>Category</Form.Label>
+
+              <Form.Group controlId='image' className='mb-1'>
+                <Form.Label>Image</Form.Label>
                 <Form.Control
+                  className='mb-1'
                   type='text'
-                  onChange={(e) => setCategory(e.target.value)}
-                />
+                  placeholder='Enter image url'
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                ></Form.Control>
+                <Form.Control
+                  type='file'
+                  label='Choose file'
+                  onChange={uploadImageHandler}
+                ></Form.Control>
               </Form.Group>
-              <Form.Group className='mb-3' controlId='brand'>
+
+              <Form.Group className='mb-1' controlId='brand'>
                 <Form.Label className='fw-bold text-black'>Brand</Form.Label>
                 <Form.Control
                   type='text'
+                  placeholder='Enter brand'
                   onChange={(e) => setBrand(e.target.value)}
                 />
+              </Form.Group>
+
+              <Form.Group className='mb-1' controlId='category'>
+                <Form.Label className='fw-bold text-black'>Category</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Enter category'
+                  onChange={(e) => setCategory(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group controlId='description' className='mb-1'>
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as='textarea'
+                  placeholder='Enter description'
+                  rows={2}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group controlId='countInStock' className='mb-1'>
+                <Form.Label>Count In Stock</Form.Label>
+                <Form.Control
+                  type='number'
+                  value={countInStock}
+                  onChange={(e) => setCountInStock(e.target.value)}
+                ></Form.Control>
               </Form.Group>
 
               {loadingCreate ? (
                 <LoaderComp />
               ) : (
-                <div className='d-grid gap-1'>
+                <div className='d-grid gap-1 mt-4'>
                   <Button onClick={createProductHandler}>Create product</Button>
                   <Button onClick={handleClose}>Cancle</Button>
                 </div>

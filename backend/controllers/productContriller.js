@@ -26,15 +26,17 @@ const getProductsById = asyncHandler(async (req, res) => {
 // @route   Get /api/products
 // @access  private/admin
 const addProduct = asyncHandler(async (req, res) => {
-  const { name, price, brand, category } = req.body
+  const { name, price, brand, category, image, description, countInStock } =
+    req.body
   const product = new Product({
     user: req.user._id,
     name,
     price,
     brand,
     category,
-    description: 'bla bla',
-    image: 'image',
+    description,
+    image,
+    countInStock,
   })
   const createdProduct = await product.save()
   res.status(200).json(createdProduct)
@@ -52,6 +54,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.brand = req.body.brand
     product.description = req.body.description
     product.countInStock = req.body.countInStock
+    product.image = req.body.image
 
     const updatedProduct = await product.save()
     res.status(200).json(updatedProduct)
