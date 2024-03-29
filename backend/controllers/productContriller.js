@@ -5,8 +5,14 @@ import asyncHandler from 'express-async-handler'
 // @route   Get /api/products
 // @access  public
 const getProducts = asyncHandler(async (req, res) => {
+  const productsPerPage = 8
+  const page = Number(req.query.pageNum) || 1
+  const count = await Product.countDocuments()
+
   const products = await Product.find({})
-  res.json(products)
+    .limit(productsPerPage)
+    .skip(productsPerPage * (page - 1))
+  res.json({ products, page, pages: Math.ceil(count / productsPerPage) })
 })
 
 // @desc    Fetch single products

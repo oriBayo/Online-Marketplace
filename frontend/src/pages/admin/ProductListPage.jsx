@@ -17,8 +17,12 @@ import {
   useCreateProductMutation,
   useUploadImageMutation,
 } from '../../features/productsApiSlice'
+import { useParams } from 'react-router-dom'
+import PaginationComp from '../../components/PaginationComp'
 
 const ProductListPage = () => {
+  const { pageNum } = useParams()
+
   const [show, setShow] = useState(false)
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
@@ -31,7 +35,7 @@ const ProductListPage = () => {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  const { data: products, refetch, isLoading } = useGetProductsQuery()
+  const { data, refetch, isLoading } = useGetProductsQuery({ pageNum })
   const [deleteProduct, { isLoading: loadingDelete }] =
     useDeleteProductMutation()
 
@@ -125,6 +129,8 @@ const ProductListPage = () => {
                 ></Form.Control>
               </Form.Group>
 
+              {loadingUpload && <LoaderComp />}
+
               <Form.Group className='mb-1' controlId='brand'>
                 <Form.Label className='fw-bold text-black'>Brand</Form.Label>
                 <Form.Control
@@ -176,7 +182,7 @@ const ProductListPage = () => {
         </Offcanvas.Body>
       </Offcanvas>
 
-      <Row className='align-items-center text-center m-4'>
+      <Row className='mb-3'>
         <Col>
           <h1 className='text-start'>Products</h1>
         </Col>
@@ -191,7 +197,7 @@ const ProductListPage = () => {
           {isLoading ? (
             <LoaderComp />
           ) : (
-            <Table hover responsive striped className='text-center'>
+            <Table hover responsive striped className='text-center table-sm'>
               <thead>
                 <tr>
                   <th>ID</th>
@@ -203,7 +209,7 @@ const ProductListPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
+                {data.products.map((product) => (
                   <tr key={product._id}>
                     <td>{product._id}</td>
                     <td>{product.name}</td>
@@ -230,6 +236,11 @@ const ProductListPage = () => {
               </tbody>
             </Table>
           )}
+          <PaginationComp
+            page={data?.page}
+            pages={data?.pages}
+            isAdmin={true}
+          />
         </Col>
       </Row>
     </>
