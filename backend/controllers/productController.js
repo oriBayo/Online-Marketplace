@@ -7,6 +7,11 @@ import asyncHandler from 'express-async-handler'
 const getProducts = asyncHandler(async (req, res) => {
   const productsPerPage = 8
   const page = Number(req.query.pageNum) || 1
+
+  const keyword = req.query.keyword
+    ? { name: { $regex: req.query.keyword } }
+    : {}
+
   const count = await Product.countDocuments()
 
   const products = await Product.find({})
@@ -70,10 +75,10 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc    Create product reviewe
+// @desc    Create product review
 // @route   POST /api/products/:id/reviews
 // @access  private
-const createProductReviewe = asyncHandler(async (req, res) => {
+const createProductReview = asyncHandler(async (req, res) => {
   const productId = req.params.id
   const userId = req.user._id
   const product = await Product.findById(productId)
@@ -93,11 +98,11 @@ const createProductReviewe = asyncHandler(async (req, res) => {
       })
       product.numReviews = product.reviews.length
       product.rating =
-        product.reviews.reduce((acc, reviewe) => acc + reviewe.rating, 0) /
+        product.reviews.reduce((acc, review) => acc + review.rating, 0) /
         product.reviews.length
 
       await product.save()
-      res.status(200).json({ message: 'Reviewe added' })
+      res.status(200).json({ message: 'Review added' })
     } else {
       res.status(400)
       throw new Error('Product already reviewed')
@@ -129,5 +134,5 @@ export {
   getProductsById,
   updateProduct,
   deleteProduct,
-  createProductReviewe,
+  createProductReview,
 }

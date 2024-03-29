@@ -50,7 +50,7 @@ const OrderListPage = () => {
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
-                    <Button className='btn btn-sm'>Detailes</Button>
+                    <Button className='btn btn-sm'>Details</Button>
                   </LinkContainer>
                 </td>
               </tr>

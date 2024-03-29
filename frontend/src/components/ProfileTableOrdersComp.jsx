@@ -23,7 +23,7 @@ const ProfileTableOrdersComp = () => {
               <th>DATE</th>
               <th>TOTAL</th>
               <th>PAID</th>
-              <th>DELEIVERED</th>
+              <th>DELIVERED</th>
               <th></th>
             </tr>
           </thead>

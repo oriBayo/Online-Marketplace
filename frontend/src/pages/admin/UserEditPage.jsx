@@ -39,7 +39,7 @@ const UserEditPage = () => {
     try {
       updateUser({ userId, name, email, isAdmin }).unwrap()
       refetch()
-      toast.success('User updated successfuly')
+      toast.success('User updated successfully')
     } catch (error) {
       toast.error(error?.data?.message || error?.error)
     }

@@ -124,7 +124,7 @@ const RegistrationPage = () => {
             style={{ width: '8rem' }}
             onClick={() => navigate('/login')}
           >
-            Cancle
+            Cancel
           </Button>
         </div>
       </Form>

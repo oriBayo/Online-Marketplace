@@ -82,7 +82,7 @@ const LoginPage = () => {
             Login
           </Button>
           <Button variant='dark' style={{ width: '8rem' }}>
-            Cancle
+            Cancel
           </Button>
         </div>
         <Row>

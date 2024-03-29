@@ -15,7 +15,7 @@ const UsersListPage = () => {
     try {
       await deleteUser(userId).unwrap()
       refetch()
-      toast.success('User deletes successfuly')
+      toast.success('User deletes successfully')
     } catch (error) {
       toast.error(error?.data?.message || error?.error)
     }

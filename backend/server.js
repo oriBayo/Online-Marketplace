@@ -1,7 +1,6 @@
 import path from 'path'
 import express from 'express'
 import dotenv from 'dotenv'
-import colors from 'colors'
 import cors from 'cors'
 import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
@@ -10,6 +9,7 @@ import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import { errorHandler, notFound } from './middleware/errorMiddleware.js'
 import cookieParser from 'cookie-parser'
+import color from 'colors'
 
 dotenv.config()
 
@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 app.get('/', (req, res) => {
-  res.send('api is runing...')
+  res.send('api is running...')
 })
 
 app.use('/api/products', productRoutes)
@@ -52,6 +52,6 @@ app.use(errorHandler)
 app.listen(
   PORT,
   console.log(
-    `Server runing in ${process.env.NODE_ENV} on port ${PORT}`.yellow.bold
+    `Server running in ${process.env.NODE_ENV} on port ${PORT}`.yellow.bold
   )
 )

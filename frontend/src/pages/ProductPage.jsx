@@ -9,7 +9,7 @@ import { useGetProductDetailsQuery } from '../features/productsApiSlice'
 import { addToCart } from '../features/cartSlice'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { useCreateProductRevieveMutation } from '../features/productsApiSlice'
+import { useCreateProductReviewMutation } from '../features/productsApiSlice'
 import { useSelector } from 'react-redux'
 
 const ProductPage = () => {
@@ -35,19 +35,19 @@ const ProductPage = () => {
     navigate('/cart')
   }
 
-  const [createReviewe, { isLoading: loadingCreateReview }] =
-    useCreateProductRevieveMutation()
+  const [createReview, { isLoading: loadingCreateReview }] =
+    useCreateProductReviewMutation()
 
   const submitHandler = async (e) => {
     e.preventDefault()
     try {
-      await createReviewe({
+      await createReview({
         productId,
         comment,
         rating,
       }).unwrap()
       refetch()
-      toast.success('Reviewe created successfuly')
+      toast.success('Review created successfully')
       setComment('')
       setRating(0)
     } catch (error) {
@@ -191,7 +191,7 @@ const ProductPage = () => {
                   </ListGroup.Item>
                 ))}
                 <ListGroup.Item>
-                  <h2>Write a Customer Reviewe</h2>
+                  <h2>Write a Customer Review</h2>
                   {loadingCreateReview && <LoaderComp />}
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>

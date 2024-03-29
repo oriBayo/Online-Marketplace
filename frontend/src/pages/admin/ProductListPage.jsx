@@ -174,7 +174,7 @@ const ProductListPage = () => {
               ) : (
                 <div className='d-grid gap-1 mt-4'>
                   <Button onClick={createProductHandler}>Create product</Button>
-                  <Button onClick={handleClose}>Cancle</Button>
+                  <Button onClick={handleClose}>Cancel</Button>
                 </div>
               )}
             </Form>

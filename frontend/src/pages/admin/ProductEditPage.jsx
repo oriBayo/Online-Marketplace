@@ -61,7 +61,7 @@ const ProductEditPage = () => {
         countInStock,
       }).unwrap()
       refetch()
-      toast.success('Product Updated seccessfuly')
+      toast.success('Product Updated successfully')
     } catch (error) {
       toast.error(error)
     }

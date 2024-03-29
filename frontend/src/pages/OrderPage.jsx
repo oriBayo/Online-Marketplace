@@ -16,7 +16,7 @@ import LoaderComp from '../components/LoaderComp'
 import { Link } from 'react-router-dom'
 import {
   useGetOrderDetailsQuery,
-  useGetPaypalClienIdQuery,
+  useGetPaypalClientIdQuery,
   usePayOrderMutation,
   useDeliverOrderMutation,
 } from '../features/orderApiSlice'
@@ -43,7 +43,7 @@ const OrderPage = () => {
     data: paypal,
     isLoading: loadingPaypal,
     error: errorPaypal,
-  } = useGetPaypalClienIdQuery()
+  } = useGetPaypalClientIdQuery()
 
   const { userInfo } = useSelector((state) => state.users)
 
@@ -141,7 +141,7 @@ const OrderPage = () => {
                   </p>
                   {order.isDelivered ? (
                     <MessageComp variant='success'>
-                      Deliverd on {order.deliveredAt}
+                      Delivered on {order.deliveredAt}
                     </MessageComp>
                   ) : (
                     <MessageComp variant='danger'>Not delivered</MessageComp>
@@ -156,7 +156,7 @@ const OrderPage = () => {
                   </p>
                   {order.isPaid ? (
                     <MessageComp variant='success'>
-                      Paind on {order.paidAt}
+                      Paid on {order.paidAt}
                     </MessageComp>
                   ) : (
                     <MessageComp variant='danger'>Not paid</MessageComp>
