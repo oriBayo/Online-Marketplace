@@ -42,6 +42,11 @@ const router = createBrowserRouter(
         <Route index={true} path='/' Component={HomePage} />
         <Route path='products' Component={ProductsPage} />
         <Route path='products/page/:pageNum' Component={ProductsPage} />
+        <Route path='products/search/:keyword' Component={ProductsPage} />
+        <Route
+          path='products/search/:keyword/page/:pageNum'
+          Component={ProductsPage}
+        />
         <Route path='products/:id' Component={ProductPage} />
         <Route path='register' Component={RegistrationPage} />
         <Route path='login' Component={LoginPage} />

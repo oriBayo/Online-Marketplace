@@ -1,17 +1,35 @@
-import { Form, InputGroup } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
-const SearchComp = ({ productToSearch, setProductToSearch }) => {
+const SearchComp = () => {
+  const navigate = useNavigate()
+  const { keyword: urlKeyword } = useParams()
+  const [keyword, setKeyword] = useState(urlKeyword || '')
+  const submitHandler = (e) => {
+    e.preventDefault()
+    if (keyword) {
+      setKeyword('')
+      navigate(`/products/search/${keyword}`)
+    } else {
+      navigate('/products')
+    }
+  }
   return (
-    <InputGroup className='my-5'>
+    <Form onSubmit={submitHandler} className='d-flex border w-25 me-3'>
       <Form.Control
-        className='border border-dark'
-        placeholder='Search Product'
-        aria-label="Recipient's username"
-        aria-describedby='basic-addon2'
-        value={productToSearch}
-        onChange={(e) => setProductToSearch(e.target.value)}
+        type='search'
+        placeholder='Search'
+        className='me-2'
+        aria-label='Search'
+        size='sm'
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
       />
-    </InputGroup>
+      <Button type='submit' variant='outline-dark btn-sm'>
+        Search
+      </Button>
+    </Form>
   )
 }
 

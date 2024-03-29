@@ -5,19 +5,12 @@ import RatingComp from './RatingComp'
 
 const ProductComp = ({ product }) => {
   return (
-    <Card
-      style={{ minHeight: '350px' }}
-      className='my-3 p-3 rounded single-item'
-    >
-      <Link
-        style={{ minHeight: '300px' }}
-        to={`/products/${product._id}`}
-        className='custom-link'
-      >
+    <Card className='my-3 p-3 rounded'>
+      <Link to={`/products/${product._id}`}>
         <Card.Img src={product.image} variant='top' className='p-2' />
       </Link>
       <Card.Body>
-        <Link to={`/products/${product._id}`} className='custom-link'>
+        <Link to={`/products/${product._id}`}>
           <Card.Title as='div'>
             <strong>{product.name}</strong>
           </Card.Title>

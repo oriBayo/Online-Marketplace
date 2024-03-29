@@ -12,6 +12,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, removeFromCart } from '../features/cartSlice'
 import MessageComp from '../components/MessageComp'
+import BackBtnComp from '../components/BackBtnComp'
 
 const CartPage = () => {
   const navigate = useNavigate()
@@ -40,7 +41,10 @@ const CartPage = () => {
     <Container>
       <Row>
         <Col md={8}>
-          <h1>Shopping Cart</h1>
+          <div className='d-flex align-items-center my-4'>
+            <BackBtnComp url={'/products'} />
+            <h1 className='ms-5'>Shopping Cart</h1>
+          </div>
           {cartItems.length === 0 ? (
             <MessageComp>
               Your cart is empty <Link to='/products'>Go Back</Link>

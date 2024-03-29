@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../features/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { useLogoutMutation } from '../features/usersApiSlice'
+import SearchComp from './SearchComp'
 
 const NavbarComp = () => {
   const navigate = useNavigate()
@@ -47,7 +48,8 @@ const NavbarComp = () => {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav className='justify-content-end flex-grow-1 pe-3'>
+              <Nav className='justify-content-end flex-grow-1 pe-3 align-items-center '>
+                <SearchComp />
                 <LinkContainer className='navbar-expand-links' to='/'>
                   <Nav.Link>
                     <i className='fa-solid fa-house me-1'></i>Home
