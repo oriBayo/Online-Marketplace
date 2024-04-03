@@ -16,7 +16,7 @@ const SearchComp = () => {
     }
   }
   return (
-    <Form onSubmit={submitHandler} className='d-flex border w-25 me-3'>
+    <Form onSubmit={submitHandler} className='d-flex border w-50 me-3'>
       <Form.Control
         type='search'
         placeholder='Search'

@@ -128,6 +128,14 @@ const deleteProduct = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc    Get top products
+// @route   Get /api/products/top
+// @access  public
+const getTopProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3)
+  return res.status(200).json(products)
+})
+
 export {
   addProduct,
   getProducts,
@@ -135,4 +143,5 @@ export {
   updateProduct,
   deleteProduct,
   createProductReview,
+  getTopProducts,
 }

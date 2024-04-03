@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import PaginationComp from '../components/PaginationComp'
 import { useSelector } from 'react-redux'
 import BackBtnComp from '../components/BackBtnComp'
+import ProductCarousel from '../components/ProductCarousel'
 
 const ProductsPage = () => {
   const { pageNum, keyword } = useParams()
@@ -15,10 +16,7 @@ const ProductsPage = () => {
 
   return (
     <>
-      {keyword && <BackBtnComp url={'/products'} />}
-      <h1 className='text-capitalize text-center'>
-        Our <strong className='banner-title'>Products</strong>
-      </h1>
+      {!keyword ? <ProductCarousel /> : <BackBtnComp url={'/products'} />}
 
       {isLoading ? (
         <Loader />
@@ -28,6 +26,9 @@ const ProductsPage = () => {
         </Message>
       ) : (
         <>
+          <h1 className='text-capitalize text-center'>
+            Our <strong className='banner-title'>Products</strong>
+          </h1>
           <Row>
             {data.products.map((product) => (
               <Col
