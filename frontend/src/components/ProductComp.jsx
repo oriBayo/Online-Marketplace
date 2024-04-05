@@ -5,9 +5,13 @@ import RatingComp from './RatingComp'
 
 const ProductComp = ({ product }) => {
   return (
-    <Card className='my-3 p-3 rounded'>
+    <Card className='my-3 p-3 rounded product-card'>
       <Link to={`/products/${product._id}`}>
-        <Card.Img src={product.image} variant='top' className='p-2' />
+        <Card.Img
+          src={product.image}
+          variant='top'
+          className='p-2 product-img'
+        />
       </Link>
       <Card.Body>
         <Link to={`/products/${product._id}`}>

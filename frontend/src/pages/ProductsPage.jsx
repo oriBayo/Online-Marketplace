@@ -11,7 +11,7 @@ import ProductCarousel from '../components/ProductCarousel'
 
 const ProductsPage = () => {
   const { pageNum, keyword } = useParams()
-  const { data, isLoading, isError } = useGetProductsQuery({ pageNum, keyword })
+  const { data, isLoading, error } = useGetProductsQuery({ pageNum, keyword })
   const userInfo = useSelector((state) => state.users.userInfo)
 
   return (
@@ -20,9 +20,9 @@ const ProductsPage = () => {
 
       {isLoading ? (
         <Loader />
-      ) : isError ? (
+      ) : error ? (
         <Message variant='danger'>
-          {isError?.data?.message || isError?.error}
+          {error?.data?.message || error?.error}
         </Message>
       ) : (
         <>

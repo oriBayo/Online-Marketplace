@@ -10,9 +10,6 @@ const userSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    cleanError: (state) => {
-      state.error = null
-    },
     logout: (state) => {
       state.userInfo = null
       localStorage.clear()
@@ -21,12 +18,8 @@ const userSlice = createSlice({
       state.userInfo = action.payload
       localStorage.setItem('userInfo', JSON.stringify(action.payload))
     },
-    addError: (state, action) => {
-      state.error = action.payload
-    },
   },
 })
 
-export const { cleanError, logout, addError, setCredentials } =
-  userSlice.actions
+export const { logout, setCredentials } = userSlice.actions
 export default userSlice.reducer

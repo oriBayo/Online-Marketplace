@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-
+import Meta from '../components/Meta'
 import RatingComp from '../components/RatingComp'
 import LoaderComp from '../components/LoaderComp'
 import MessageComp from '../components/MessageComp'
@@ -26,7 +26,7 @@ const ProductPage = () => {
   const {
     data: product,
     isLoading,
-    isError,
+    error,
     refetch,
   } = useGetProductDetailsQuery(productId)
 
@@ -59,12 +59,13 @@ const ProductPage = () => {
     <>
       {isLoading ? (
         <LoaderComp />
-      ) : isError ? (
+      ) : error ? (
         <MessageComp variant='danger'>
-          {isError?.data.message || isError?.error}
+          {error?.data?.message || error?.error}
         </MessageComp>
       ) : (
         <>
+          <Meta title={product.name} />
           <Link className='btn btn-light my-3 border' to={'/products'}>
             Go Back
           </Link>

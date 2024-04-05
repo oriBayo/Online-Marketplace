@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
-import { cleanError, addError, setCredentials } from '../features/userSlice'
+import { setCredentials } from '../features/userSlice'
 import FormContainer from '../components/FormContainer'
 import { logicNames } from '../constants/stringConstant'
 import '../styles/login.css'
 import { useDispatch } from 'react-redux'
 import { useRegisterMutation } from '../features/usersApiSlice'
+import { toast } from 'react-toastify'
 
 const RegistrationPage = () => {
   const [placeholders, setPlaceholders] = useState({
@@ -60,13 +61,11 @@ const RegistrationPage = () => {
         }).unwrap()
         dispatch(setCredentials({ ...res }))
       } else {
-        dispatch(addError('Password do not match'))
+        toast.error('Password do not match')
       }
-
-      setTimeout(() => {
-        dispatch(cleanError())
-      }, 3000)
-    } catch (error) {}
+    } catch (error) {
+      toast.error(error)
+    }
   }
   const handleFocus = (inputName) => {
     setPlaceholders((prevPlaceholders) => ({
@@ -109,7 +108,11 @@ const RegistrationPage = () => {
             </Form.Group>
           )
         )}
-        {error !== '' && <p className='text-danger fw-bold ms-3'>{error}</p>}
+        {error !== '' && (
+          <p className='text-danger fw-bold ms-3'>
+            {error?.data?.message || error.error}
+          </p>
+        )}
         <div className='d-flex m-3 justify-content-center'>
           <Button
             type='submit'

@@ -4,8 +4,9 @@ import FormContainer from '../components/FormContainer'
 import '../styles/login.css'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
-import { setCredentials, cleanError } from '../features/userSlice'
+import { setCredentials } from '../features/userSlice'
 import { useLoginMutation } from '../features/usersApiSlice'
+import { toast } from 'react-toastify'
 
 const LoginPage = () => {
   const dispatch = useDispatch()
@@ -35,11 +36,8 @@ const LoginPage = () => {
     try {
       const res = await login({ email, password }).unwrap()
       dispatch(setCredentials({ ...res }))
-      setTimeout(() => {
-        dispatch(cleanError())
-      }, 3000)
     } catch (error) {
-      console.log(error)
+      toast.error(error)
     }
   }
   return (

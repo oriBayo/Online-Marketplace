@@ -9,29 +9,29 @@ import {
   Image,
   Card,
 } from 'react-bootstrap'
-import CheckOutStaepsComp from '../components/CheckOutStepsComp'
+import CheckOutStepsComp from '../components/CheckOutStepsComp'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import MessageComp from '../components/MessageComp'
 import LoaderComp from '../components/LoaderComp'
 import { useCreateOrderMutation } from '../features/orderApiSlice'
-import {clearCartItems} from '../features/cartSlice'
+import { clearCartItems } from '../features/cartSlice'
+import { toast } from 'react-toastify'
 
 const PlaceOrderPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
- 
-  const [createOrder, { isLoading, error }] =
-    useCreateOrderMutation()
+
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation()
 
   useEffect(() => {
     if (!cart.shippingAddress.address) {
       navigate('/shipping')
-    }else if(!cart.paymentMethod){
+    } else if (!cart.paymentMethod) {
       navigate('payment')
     }
-  },[cart.shippingAddress.address, cart.paymentMethod , navigate])
+  }, [cart.shippingAddress.address, cart.paymentMethod, navigate])
 
   const placeOrderHandler = async () => {
     try {
@@ -39,22 +39,21 @@ const PlaceOrderPage = () => {
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
-        itemsPrice : cart.itemsPrice,
-        shippingPrice : cart.shippingPrice,
-        taxPrice : cart.taxPrice,
-        totalPrice : cart.totalPrice,
-      }).unwrap()  
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      }).unwrap()
       dispatch(clearCartItems())
       navigate(`/order/${res._id}`)
     } catch (error) {
-      console.error(error)
+      toast.error(error)
     }
-  
   }
   return (
     <Container>
       <Row>
-        <CheckOutStaepsComp step1 step2 step3 step4 />
+        <CheckOutStepsComp step1 step2 step3 step4 />
         {isLoading ? (
           <LoaderComp />
         ) : (
@@ -66,7 +65,8 @@ const PlaceOrderPage = () => {
                   <p>
                     <strong className='fw-bold'>Address: </strong>
                     {cart.shippingAddress.address},{cart.shippingAddress.city}
-                    {cart.shippingAddress.postalCode},{cart.shippingAddress.country}
+                    {cart.shippingAddress.postalCode},
+                    {cart.shippingAddress.country}
                   </p>
                 </ListGroup.Item>
 
@@ -145,7 +145,9 @@ const PlaceOrderPage = () => {
                   </ListGroup.Item>
                   <ListGroup.Item>
                     {error && (
-                      <MessageComp variant='danger'>{error}</MessageComp>
+                      <MessageComp variant='danger'>
+                        {error?.data?.message || error.error}
+                      </MessageComp>
                     )}
                   </ListGroup.Item>
                   <ListGroup.Item>

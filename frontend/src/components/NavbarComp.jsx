@@ -7,6 +7,8 @@ import { logout } from '../features/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { useLogoutMutation } from '../features/usersApiSlice'
 import SearchComp from './SearchComp'
+import { toast } from 'react-toastify'
+import { resetCart } from '../features/cartSlice'
 
 const NavbarComp = () => {
   const navigate = useNavigate()
@@ -21,9 +23,10 @@ const NavbarComp = () => {
     try {
       await logoutApiCall().unwrap()
       dispatch(logout())
+      dispatch(resetCart())
       navigate('/')
     } catch (error) {
-      console.error(error)
+      toast.error(error)
     }
   }
   return (
