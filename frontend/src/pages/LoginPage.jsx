@@ -69,7 +69,7 @@ const LoginPage = () => {
             {error?.data?.message || error?.error}
           </p>
         )}
-        <div className='mt-4 d-flex justify-content-center'>
+        <div className='m-3 d-flex justify-content-center'>
           <Button
             type='submit'
             variant='light'
@@ -83,16 +83,14 @@ const LoginPage = () => {
           </Button>
         </div>
         <Row>
-          <Col className='pt-5 text-center'>
-            <div className='h5'>
-              New Customer?
-              <Link
-                className='text-info ms-2 '
-                to={redirect ? `/register?redirect=${redirect}` : '/register'}
-              >
-                Register
-              </Link>
-            </div>
+          <Col className='text-center p-2'>
+            New Customer?
+            <Link
+              className='text-info ms-1 '
+              to={redirect ? `/register?redirect=${redirect}` : '/register'}
+            >
+              Register
+            </Link>
           </Col>
         </Row>
       </Form>

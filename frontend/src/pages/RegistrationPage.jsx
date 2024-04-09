@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { Form, Button } from 'react-bootstrap'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { Form, Button, Row, Col } from 'react-bootstrap'
 import { setCredentials } from '../features/userSlice'
 import FormContainer from '../components/FormContainer'
 import { logicNames } from '../constants/stringConstant'
@@ -107,7 +107,7 @@ const RegistrationPage = () => {
             </Form.Group>
           )
         )}
-        {error !== '' && (
+        {error && (
           <p className='text-danger fw-bold ms-3'>
             {error?.data?.message || error.error}
           </p>
@@ -129,6 +129,17 @@ const RegistrationPage = () => {
             Cancel
           </Button>
         </div>
+        <Row>
+          <Col className='text-center p-2'>
+            Already have an account?
+            <Link
+              to={redirect ? `/login?redirect=${redirect}` : '/login'}
+              className='text-info ms-1'
+            >
+              Login
+            </Link>
+          </Col>
+        </Row>
       </Form>
     </FormContainer>
   )
