@@ -17,8 +17,8 @@ const BannerPage = () => {
             <Button variant='outline-secondary' className='w-25 mb-5 mt-3'>
               explore
             </Button>
-            <Row className='mx-auto w-50'>
-              <Col xl={4}>
+            <Row className='mx-auto '>
+              <Col md={4} className='text-end p-0'>
                 <ScrollTrigger
                   onEnter={() => setTrigger(true)}
                   onExit={() => setTrigger(false)}
@@ -30,12 +30,12 @@ const BannerPage = () => {
 
                 <div>Premium Products</div>
               </Col>
-              <Col xl={4}>
+              <Col md={4} className='p-0'>
                 <ScrollTrigger
                   onEnter={() => setTrigger(true)}
                   onExit={() => setTrigger(false)}
                 >
-                  <div className='display-5 countup'>
+                  <div className='display-5 countup '>
                     {trigger && (
                       <CountUp start={14800} end={15000} suffix='+' />
                     )}
@@ -43,7 +43,7 @@ const BannerPage = () => {
                 </ScrollTrigger>
                 <div>Happy Customers</div>
               </Col>
-              <Col xl={4}>
+              <Col md={4} className='text-start p-0'>
                 <ScrollTrigger
                   onEnter={() => setTrigger(true)}
                   onExit={() => setTrigger(false)}

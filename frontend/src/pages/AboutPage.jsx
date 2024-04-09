@@ -1,7 +1,6 @@
 import { Container, Row, Col, Button, Image } from 'react-bootstrap'
 import { aboutUsContent } from '../constants/stringConstant.js'
 import aboutImg from '../asserts/management_team.jpg'
-import '../styles/about.css'
 
 const AboutPage = () => {
   return (

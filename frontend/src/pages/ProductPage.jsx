@@ -75,7 +75,7 @@ const ProductPage = () => {
                 <Image src={product.image} alt={product.name} fluid />
               </Row>
               <Row className='my-3'>
-                <Col className='img-carousel'>
+                <Col>
                   <Image src={product.image} alt={product.name} fluid />
                 </Col>
                 <Col className='img-carousel'>
@@ -184,14 +184,14 @@ const ProductPage = () => {
               )}
               <ListGroup variant='flush'>
                 {product.reviews.map((review) => (
-                  <ListGroup.Item key={review.name}>
+                  <ListGroup.Item key={review.name} className='m-2'>
                     <strong>{review.name}</strong>
                     <RatingComp value={review.rating} />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>
                   </ListGroup.Item>
                 ))}
-                <ListGroup.Item>
+                <ListGroup.Item className='p-0'>
                   <h2>Write a Customer Review</h2>
                   {loadingCreateReview && <LoaderComp />}
                   {userInfo ? (

@@ -1,3 +1,63 @@
+:root{
+  --mainPink:#ef7998;
+  --mainYellow: rgb(249, 228, 148);
+  --mainWhite: #fff;
+  --mainBlack: #000;
+  --yellowTrans: rgba(204, 151, 101, 0.5);
+  --mainGrey: rgb(238, 238, 238);
+}
+.max-height{
+  min-height: 85vh;
+}
+main{
+  min-height: calc(100vh - 70px - 80px);
+}
+.countup{
+  color: var(--mainPink)
+}
+.homePage{
+  position: absolute;
+  width: 100%;
+  
+  background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url("./asserts/Leonardo_Diffusion_apple_products_1.jpg") 
+  center/cover no-repeat fixed;
+
+}
+
+.banner{
+  color: var(--mainWhite);
+}
+.banner-title{
+  color: var(--mainPink);
+  font-size: 3rem;
+}
+.banner-link{
+  font-size: 1.5rem;
+  color: var(--mainBlack);
+  border: 0.2rem solid --mainBlack;
+ 
+}
+.banner-link:hover{
+  background-color: var(--mainBlack);
+}
+
+.img-carousel{
+  cursor: pointer;
+}
+
+.single-item:hover{
+  box-shadow: 0 10px 15px rgb(0,0,0);
+  transform: translateY(-20px)
+}
+
+.icon{
+  cursor: pointer;
+}
+.icon:hover{
+  transform: translatey(-1.5px);
+  color: red;
+}
+
 main {
   min-height: 80vh;
 }
@@ -44,13 +104,59 @@ table th {
 }
 
 .carousel-caption {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.about-img__container{
+  position: relative;
+}
+
+.about-img__container::before{
+  position: absolute;
+  content: '';
+  top: -1.5rem;
+  right: -1.7rem;
+  width: 100%;
+  height: 100%;
+  box-shadow: var(--mainGrey) 0px 0px 0px 5px;
+  z-index: -1;
+  transition: all 1s linear;
+}
+.about-img__container:hover::before{
+  top: 0;
+  right: 0;
+}
+
+.product-img{
+  width: 200px; /* Set your desired width */
+  height: 300px; /* Set your desired height */
+  object-fit: cover; /* Maintain aspect ratio and cover container */
+}
+
+footer{
+  height: 80px;
 }
 
 
-.c-img{
-  width: 40%;
-  
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+
+.loginCard{
+    /* height: 550px; */
+    border-radius: 10px;  
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    background: url('../public/images/background/login.jpg') center / cover no-repeat ;
+}
+
+nav{
+  height: 70px;
+}
+
+.logo:hover{
+  cursor: pointer;
+}
+
+a{
+  text-decoration: none !important;
 }
 
 

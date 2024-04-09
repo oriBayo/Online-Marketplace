@@ -1,5 +1,4 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import '../styles/footer.css'
 
 const FooterComp = () => {
   return (

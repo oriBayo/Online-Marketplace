@@ -1,6 +1,5 @@
 import { Container, Nav, Navbar, NavDropdown, Badge } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import '../styles/navbar.css'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../features/userSlice'

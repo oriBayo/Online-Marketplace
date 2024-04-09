@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import FormContainer from '../components/FormContainer'
-import '../styles/login.css'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '../features/userSlice'
