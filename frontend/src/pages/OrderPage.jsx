@@ -1,7 +1,7 @@
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   Container,
   Row,
@@ -10,42 +10,42 @@ import {
   Image,
   Card,
   Button,
-} from 'react-bootstrap'
-import MessageComp from '../components/MessageComp'
-import LoaderComp from '../components/LoaderComp'
-import { Link } from 'react-router-dom'
+} from 'react-bootstrap';
+import MessageComp from '../components/MessageComp';
+import LoaderComp from '../components/LoaderComp';
+import { Link } from 'react-router-dom';
 import {
   useGetOrderDetailsQuery,
   useGetPaypalClientIdQuery,
   usePayOrderMutation,
   useDeliverOrderMutation,
-} from '../features/orderApiSlice'
-import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
+} from '../features/orderApiSlice';
+import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 
 const OrderPage = () => {
-  const { id: orderId } = useParams()
+  const { id: orderId } = useParams();
 
   const {
     data: order,
     refetch,
     isLoading,
     error,
-  } = useGetOrderDetailsQuery(orderId)
+  } = useGetOrderDetailsQuery(orderId);
 
-  const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation()
+  const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
 
-  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer()
+  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
   const [deliverOrder, { isLoading: loadingDeliver }] =
-    useDeliverOrderMutation()
+    useDeliverOrderMutation();
 
   const {
     data: paypal,
     isLoading: loadingPaypal,
     error: errorPaypal,
-  } = useGetPaypalClientIdQuery()
+  } = useGetPaypalClientIdQuery();
 
-  const { userInfo } = useSelector((state) => state.users)
+  const { userInfo } = useSelector((state) => state.users);
 
   useEffect(() => {
     if (!errorPaypal && !loadingPaypal && paypal.clientId) {
@@ -56,37 +56,37 @@ const OrderPage = () => {
             clientId: paypal.clientId,
             currency: 'USD',
           },
-        })
-        paypalDispatch({ type: 'setLoadingStatus', value: 'pending' })
-      }
+        });
+        paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
+      };
       if (order && !order.isPaid) {
         if (!window.paypal) {
-          loadPayPalScript()
+          loadPayPalScript();
         }
       }
     }
-  }, [order, paypal, paypalDispatch, loadingPaypal, errorPaypal])
+  }, [order, paypal, paypalDispatch, loadingPaypal, errorPaypal]);
 
   const onApprove = (data, actions) => {
     return actions.order.capture().then(async function (details) {
       try {
-        await payOrder({ orderId, details })
-        refetch()
-        toast.success('Payment successful')
+        await payOrder({ orderId, details });
+        refetch();
+        toast.success('Payment successful');
       } catch (error) {
-        toast.error(error?.data?.message || error.message)
+        toast.error(error?.data?.message || error.message);
       }
-    })
-  }
+    });
+  };
 
   const onApproveTest = async () => {
-    await payOrder({ orderId, details: { payer: {} } })
-    refetch()
-    toast.success('Payment successful')
-  }
+    await payOrder({ orderId, details: { payer: {} } });
+    refetch();
+    toast.success('Payment successful');
+  };
   const onError = (error) => {
-    toast.error(error.message)
-  }
+    toast.error(error.message);
+  };
   const createOrder = (data, actions) => {
     return actions.order
       .create({
@@ -99,19 +99,19 @@ const OrderPage = () => {
         ],
       })
       .then((orderId) => {
-        return orderId
-      })
-  }
+        return orderId;
+      });
+  };
 
   const deliverOrderHandler = async () => {
     try {
-      await deliverOrder(orderId).unwrap()
-      refetch()
-      toast.success('Order delivered')
+      await deliverOrder(orderId).unwrap();
+      refetch();
+      toast.success('Order delivered');
     } catch (error) {
-      toast.error(error)
+      toast.error(error);
     }
-  }
+  };
 
   return (
     <Container>
@@ -189,7 +189,7 @@ const OrderPage = () => {
                             </Col>
                           </Row>
                         </ListGroup.Item>
-                      )
+                      );
                     })}
                   </ListGroup>
                 </ListGroup.Item>
@@ -237,19 +237,11 @@ const OrderPage = () => {
                         <LoaderComp />
                       ) : (
                         <div>
-                          <Button
-                            onClick={onApproveTest}
-                            style={{ marginBottom: '10px' }}
-                          >
-                            Test Pay Order
-                          </Button>
-                          <div>
-                            <PayPalButtons
-                              createOrder={createOrder}
-                              onApprove={onApprove}
-                              onError={onError}
-                            ></PayPalButtons>
-                          </div>
+                          <PayPalButtons
+                            createOrder={createOrder}
+                            onApprove={onApprove}
+                            onError={onError}
+                          ></PayPalButtons>
                         </div>
                       )}
                     </ListGroup.Item>
@@ -282,7 +274,7 @@ const OrderPage = () => {
         )}
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default OrderPage
+export default OrderPage;
