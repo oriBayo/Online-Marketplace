@@ -37,9 +37,9 @@ This project is a full-stack online marketplace application built using React, N
 
 ## Technologies Used
 
-*   **Frontend:** React, React Router, Axios (or Fetch API), [mention any UI libraries like Material-UI, Bootstrap, etc.]
+*   **Frontend:** React, React Router, Axios (or Fetch API),
 *   **Backend:** Node.js, Express
 *   **Database:** MongoDB with Mongoose
-*   **Authentication:** [Specify the authentication method used, e.g., JWT, Passport.js]
-*   **Payment Integration:** [Specify the payment gateway used, e.g., Stripe, PayPal]
-*   **Other:** [Mention any other relevant libraries or tools, e.g., bcrypt, CORS, testing frameworks]
+*   **Authentication:** JWT, Passport.js
+*   **Payment Integration:** Stripe, PayPal
+*   **Other:** bcrypt, CORS, testing frameworks
