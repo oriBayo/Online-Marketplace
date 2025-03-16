@@ -1,32 +1,32 @@
-import jwt from 'jsonwebtoken'
-import asyncHandler from 'express-async-handler'
-import User from '../models/userModel.js'
+import jwt from 'jsonwebtoken';
+import asyncHandler from 'express-async-handler';
+import User from '../models/userModel.js';
 
 const protect = asyncHandler(async (req, res, next) => {
-  let token
-  token = req.cookies.token
+  let token;
+  token = req.cookies.token;
   if (token) {
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET)
-      req.user = await User.findById(decoded.userId).select('-password')
-      next()
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = await User.findById(decoded.userId).select('-password');
+      next();
     } catch (error) {
-      res.status(401)
-      throw new Error('Not authorized, token failed')
+      res.status(401);
+      throw new Error('Not authorized, token failed');
     }
   } else {
-    res.status(401)
-    throw new Error('Not authorized, no token')
+    res.status(401);
+    throw new Error('Not authorized, no token');
   }
-})
+});
 
 const admin = asyncHandler(async (req, res, next) => {
   if (req.user && req.user.isAdmin) {
-    next()
+    next();
   } else {
-    res.status(401)
-    throw new Error('Not authorized as admin')
+    res.status(401);
+    throw new Error('Not authorized as admin');
   }
-})
+});
 
-export { protect, admin }
+export { protect, admin };

@@ -3,6 +3,7 @@ const RatingComp = ({ value, text, color }) => {
     <div className='rating'>
       <span>
         <i
+          data-testid='star'
           style={{ color }}
           className={
             value >= 1
@@ -13,6 +14,7 @@ const RatingComp = ({ value, text, color }) => {
           }
         ></i>
         <i
+          data-testid='star'
           style={{ color }}
           className={
             value >= 2
@@ -23,6 +25,7 @@ const RatingComp = ({ value, text, color }) => {
           }
         ></i>
         <i
+          data-testid='star'
           style={{ color }}
           className={
             value >= 3
@@ -33,6 +36,7 @@ const RatingComp = ({ value, text, color }) => {
           }
         ></i>
         <i
+          data-testid='star'
           style={{ color }}
           className={
             value >= 4
@@ -43,6 +47,7 @@ const RatingComp = ({ value, text, color }) => {
           }
         ></i>
         <i
+          data-testid='star'
           style={{ color }}
           className={
             value >= 5
@@ -55,11 +60,11 @@ const RatingComp = ({ value, text, color }) => {
       </span>
       <span className='ms-2'>{text && text}</span>
     </div>
-  )
-}
+  );
+};
 
 RatingComp.defaultProps = {
   color: '#f8e825',
-}
+};
 
-export default RatingComp
+export default RatingComp;
