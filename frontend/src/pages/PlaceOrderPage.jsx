@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Container,
   Row,
@@ -8,30 +8,30 @@ import {
   Button,
   Image,
   Card,
-} from 'react-bootstrap'
-import CheckOutStepsComp from '../components/CheckOutStepsComp'
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import MessageComp from '../components/MessageComp'
-import LoaderComp from '../components/LoaderComp'
-import { useCreateOrderMutation } from '../features/orderApiSlice'
-import { clearCartItems } from '../features/cartSlice'
-import { toast } from 'react-toastify'
+} from 'react-bootstrap';
+import CheckOutStepsComp from '../components/CheckOutStepsComp';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import MessageComp from '../components/MessageComp';
+import LoaderComp from '../components/LoaderComp';
+import { useCreateOrderMutation } from '../features/orderApiSlice';
+import { clearCartItems } from '../features/cartSlice';
+import { toast } from 'react-toastify';
 
 const PlaceOrderPage = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const cart = useSelector((state) => state.cart)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
-  const [createOrder, { isLoading, error }] = useCreateOrderMutation()
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
   useEffect(() => {
     if (!cart.shippingAddress.address) {
-      navigate('/shipping')
+      navigate('/shipping');
     } else if (!cart.paymentMethod) {
-      navigate('payment')
+      navigate('payment');
     }
-  }, [cart.shippingAddress.address, cart.paymentMethod, navigate])
+  }, [cart.shippingAddress.address, cart.paymentMethod, navigate]);
 
   const placeOrderHandler = async () => {
     try {
@@ -43,13 +43,13 @@ const PlaceOrderPage = () => {
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
-      }).unwrap()
-      dispatch(clearCartItems())
-      navigate(`/order/${res._id}`)
+      }).unwrap();
+      dispatch(clearCartItems());
+      navigate(`/order/${res._id}`);
     } catch (error) {
-      toast.error(error)
+      toast.error(error);
     }
-  }
+  };
   return (
     <Container>
       <Row>
@@ -104,7 +104,7 @@ const PlaceOrderPage = () => {
                             </Col>
                           </Row>
                         </ListGroup.Item>
-                      )
+                      );
                     })}
                   </ListGroup>
                 </ListGroup.Item>
@@ -170,7 +170,7 @@ const PlaceOrderPage = () => {
         )}
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default PlaceOrderPage
+export default PlaceOrderPage;

@@ -157,4 +157,34 @@ a{
   text-decoration: none !important;
 }
 
+.notification-toggle {
+  cursor: pointer;
+}
+
+.notification-toggle::after {
+  display: none !important;
+}
+
+.notification-menu {
+  width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 8px 0;
+}
+
+.notification-item.unread {
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+.notification-content p {
+  margin-bottom: 4px;
+}
 

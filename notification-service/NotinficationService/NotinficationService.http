@@ -1,0 +1,6 @@
+@NotinficationService_HostAddress = http://localhost:5025
+
+GET {{NotinficationService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

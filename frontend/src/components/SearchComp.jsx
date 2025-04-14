@@ -1,26 +1,26 @@
-import { Form, Button } from 'react-bootstrap'
-import { useParams, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { Form, Button } from 'react-bootstrap';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const SearchComp = () => {
-  const navigate = useNavigate()
-  const { keyword: urlKeyword } = useParams()
-  const [keyword, setKeyword] = useState(urlKeyword || '')
+  const navigate = useNavigate();
+  const { keyword: urlKeyword } = useParams();
+  const [keyword, setKeyword] = useState(urlKeyword || '');
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (keyword) {
-      setKeyword('')
-      navigate(`/products/search/${keyword}`)
+      setKeyword('');
+      navigate(`/products/search/${keyword}`);
     } else {
-      navigate('/products')
+      navigate('/products');
     }
-  }
+  };
   return (
-    <Form onSubmit={submitHandler} className='d-flex border w-50 me-3'>
+    <Form onSubmit={submitHandler} className='d-flex border w-25 me-3 '>
       <Form.Control
         type='search'
         placeholder='Search'
-        className='me-2'
+        className='me-2 '
         aria-label='Search'
         size='sm'
         value={keyword}
@@ -30,7 +30,7 @@ const SearchComp = () => {
         Search
       </Button>
     </Form>
-  )
-}
+  );
+};
 
-export default SearchComp
+export default SearchComp;

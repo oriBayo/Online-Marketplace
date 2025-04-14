@@ -16,6 +16,7 @@
   "author": "Ori Bayo",
   "license": "ISC",
   "dependencies": {
+    "amqplib": "^0.10.5",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "concurrently": "^8.2.2",

@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotinficationService", "NotinficationService.csproj", "{D730B5C0-BEF6-CC77-69EB-E8E5BB9A2A0C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D730B5C0-BEF6-CC77-69EB-E8E5BB9A2A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D730B5C0-BEF6-CC77-69EB-E8E5BB9A2A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D730B5C0-BEF6-CC77-69EB-E8E5BB9A2A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D730B5C0-BEF6-CC77-69EB-E8E5BB9A2A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74BEC56D-686B-4DE2-9DC6-7A661D8B59BA}
+	EndGlobalSection
+EndGlobal
